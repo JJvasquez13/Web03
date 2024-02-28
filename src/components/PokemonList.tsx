@@ -9,11 +9,13 @@ interface PokemonListProps {
 
 const PokemonList: React.FC<PokemonListProps> = ({ pokemons, onPokemonClick }) => {
   return (
-    <ul className="pokemon-list">
+    <div className="d-flex justify-content-center align-items-center flex-wrap">
       {pokemons.map((pokemon) => (
-        <PokemonCard key={pokemon.name} pokemon={pokemon} onClick={onPokemonClick} />
+        <div key={pokemon.name}>
+          <PokemonCard pokemon={pokemon} onClick={onPokemonClick} />
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 

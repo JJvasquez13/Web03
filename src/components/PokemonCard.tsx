@@ -7,12 +7,14 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, onClick }) => {
+  const imageUrl = `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${pokemon.name.toLowerCase()}.png`;
+
   return (
-    <li className="pokemon-card" onClick={() => onClick(pokemon)}>
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-      <h2>{pokemon.name}</h2>
-      <p>#{pokemon.id}</p>
-    </li>
+    <div className="pokemon-card bg-light rounded p-3 text-center shadow mb-4" style={{ maxWidth: '400px' }} onClick={() => onClick(pokemon)}>
+      <img src={imageUrl} alt={pokemon.name} className="img-fluid mb-2" style={{ maxHeight: '200px' }} />
+      <h5 className="mb-0" style={{ fontSize: '18px' }}>{pokemon.name}</h5>
+      <p className="text-muted"># {pokemon.id}</p>
+    </div>
   );
 };
 

@@ -4,11 +4,6 @@ import { Pokemon } from './pokemon';
 import PokemonList from './components/PokemonList';
 import PokemonDetails from './components/PokemonDetails';
 
-interface AppState {
-  pokemons: Pokemon[];
-  selectedPokemon: Pokemon | null;
-}
-
 const App: React.FC = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
@@ -28,14 +23,28 @@ const App: React.FC = () => {
     setSelectedPokemon(pokemon);
   };
 
+  const handleCloseModal = () => {
+    setSelectedPokemon(null);
+  };
+
   return (
-    <div className="App">
-      <header>
-        <h1>Pokédex</h1>
+    <div className="container-fluid">
+      <header className="row mt-4">
+        <div className="col-12 text-center">
+          <h1>Pokédex</h1>
+        </div>
       </header>
       <main>
-        <PokemonList pokemons={pokemons} onPokemonClick={handlePokemonClick} />
-        {selectedPokemon && <PokemonDetails pokemon={selectedPokemon} />}
+        <div className="row justify-content-center">
+          <div className="col-2"></div> {/* Espacio a la izquierda */}
+          <div className="col-8 d-flex justify-content-between flex-wrap">
+            <PokemonList pokemons={pokemons} onPokemonClick={handlePokemonClick} />
+          </div>
+          <div className="col-2"></div> {/* Espacio a la derecha */}
+        </div>
+        {selectedPokemon && (
+          <PokemonDetails pokemon={selectedPokemon} onClose={handleCloseModal} />
+        )}
       </main>
     </div>
   );
